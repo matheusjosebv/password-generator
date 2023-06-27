@@ -1,32 +1,44 @@
 .app {
+  padding: 25px 0 0;
+
   .title {
     display: flex;
     justify-content: center;
   }
 
-  .container {
+  .option-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 500px;
-    margin: 0 auto;
+    width: 400px;
+    margin: 25px auto 0;
+    padding: 30px 0;
+    background: rgb(63, 63, 63);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 20px;
 
     .options {
       display: flex;
       flex-direction: column;
       width: 300px;
+      margin: 30px 0 0;
 
       .booleans {
+        > h4 {
+          margin: 0 0 35px;
+        }
+
         .element {
           position: relative;
+          user-select: none;
 
           &::before {
             position: absolute;
             right: 0;
             content: "";
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border: 1px solid white;
             border-radius: 50%;
           }
@@ -36,72 +48,136 @@
           &::before {
             content: "●";
             color: white;
-            font-size: 10px;
+            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1px;
           }
         }
       }
 
       .length {
+        position: relative;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         height: 20px;
-
-        > .label {
-          margin: 0;
-        }
+        user-select: none;
 
         > .input {
-          width: 60px;
+          width: 200px;
+          margin: 0 25px 0 0;
 
           &::placeholder {
             padding: 0 2px 0;
           }
         }
-      }
-    }
 
-    .password {
-      padding: 50px 0 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      > .label {
-        font-size: 28px;
-      }
-
-      .generateBtn {
-        padding: 10px 15px;
-        outline: none;
-        background: rgb(255, 218, 5);
-        border: 1px solid black;
-        border-radius: 5px;
-        color: rgb(21, 21, 21);
-        cursor: pointer;
-        transition: 0.2 background;
-        margin: 10px 0 0;
-
-        &:hover {
-          background: rgb(225, 191, 0);
+        > span {
+          position: absolute;
+          right: 0;
         }
-      }
-
-      .box {
-        margin: 25px 0 0;
-        width: 300px;
-        height: 50px;
-        background: #ddd;
-        border: 1px solid white;
-        border-radius: 10px;
-        color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
       }
     }
   }
+
+  .password-container {
+    padding: 40px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > .label {
+      font-size: 28px;
+    }
+
+    .generateBtn {
+      background: rgb(255, 218, 5);
+      border: 1px solid black;
+      color: rgb(21, 21, 21);
+      transition: 0.2s background;
+
+      &:hover {
+        background: rgb(225, 191, 0);
+      }
+
+      &:disabled {
+        background: rgb(139, 118, 0);
+        cursor: not-allowed;
+      }
+    }
+
+    .box {
+      margin: 25px 0;
+      width: 350px;
+      height: 50px;
+      background: #ddd;
+      border: 1px solid white;
+      border-radius: 10px;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+
+      .char {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 0 1px;
+      }
+
+      .hidden {
+        margin: 6px 0 0;
+      }
+    }
+
+    .btns {
+      display: flex;
+      gap: 20px;
+
+      .copyBtn {
+        width: 60px;
+        color: rgb(21, 21, 21);
+        border: 1px solid black;
+        background: rgb(5, 126, 255);
+
+        transition: 0.2s background;
+
+        &:hover {
+          background: rgb(4, 106, 215);
+        }
+      }
+
+      .hideBtn {
+        width: 60px;
+        border: 1px solid black;
+        background: rgb(5, 126, 255);
+
+        transition: 0.2s background;
+
+        .icon {
+          width: 20px;
+          height: 20px;
+          color: rgb(21, 21, 21);
+        }
+
+        &:hover {
+          background: rgb(4, 106, 215);
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
