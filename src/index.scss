@@ -29,3 +29,11 @@ p {
   margin: 0;
   padding: 0;
 }
+
+$breakpoint-tablet: 450px;
+
+@mixin media-tablet {
+  @media (min-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
