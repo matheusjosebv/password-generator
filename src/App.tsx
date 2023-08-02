@@ -4,11 +4,17 @@ import data from "./data/options";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 function App() {
-  const [visibility, setVisibility] = useState(true);
-  const [randomIndexes, setRandomIndexes] = useState([]);
-  const [characters, setCharacters] = useState([]);
-  const [password, setPassword] = useState("");
-  const [options, setOptions] = useState({
+  const [visibility, setVisibility] = useState<boolean>(true);
+  const [randomIndexes, setRandomIndexes] = useState<number[]>([]);
+  const [characters, setCharacters] = useState<(number | string)[]>([]);
+  const [password, setPassword] = useState<(string | number)[]>([]);
+  const [options, setOptions] = useState<{
+    amount: number;
+    numbers: boolean;
+    symbols: boolean;
+    upperCases: boolean;
+    lowerCases: boolean;
+  }>({
     amount: 10,
     numbers: true,
     symbols: true,
@@ -20,34 +26,34 @@ function App() {
     setCharacters([]);
 
     if (options.numbers) {
-      setCharacters((prevData) => [...prevData, ...data[0].numbers]);
+      setCharacters((prevData) => [...prevData, ...data.numbers]);
     }
 
     if (options.symbols) {
-      setCharacters((prevData) => [...prevData, ...data[1].symbols]);
+      setCharacters((prevData) => [...prevData, ...data.symbols]);
     }
 
     if (options.upperCases) {
-      setCharacters((prevData) => [...prevData, ...data[2].upperCases]);
+      setCharacters((prevData) => [...prevData, ...data.upperCases]);
     }
 
     if (options.lowerCases) {
-      setCharacters((prevData) => [...prevData, ...data[3].lowerCases]);
+      setCharacters((prevData) => [...prevData, ...data.lowerCases]);
     }
   }, [options.lowerCases, options.numbers, options.symbols, options.upperCases]);
 
   useEffect(() => {
     setRandomIndexes([]);
     for (let i = 0; i < options.amount; i++) {
-      let randomIdx;
+      let randomIdx: number;
       randomIdx = Math.floor(Math.random() * characters.length);
       setRandomIndexes((prev) => [...prev, randomIdx]);
-      console.log("loop");
     }
   }, [characters, options.amount, password]);
 
   const handleGenerate = () => {
-    const randomChars = randomIndexes.map((i) => characters[i]);
+    const randomChars: (string | number)[] = randomIndexes.map((i) => characters[i]);
+
     setPassword(randomChars);
   };
 
@@ -102,8 +108,8 @@ function App() {
               className="input"
               value={options.amount}
               onChange={(e) => {
-                if (!options.amount > 25 || !options.amount < 4) {
-                  setOptions((p) => ({ ...p, amount: e.target.value }));
+                if (options.amount < 25 || options.amount > 4) {
+                  setOptions((prev) => ({ ...prev, amount: parseFloat(e.target.value) }));
                 }
               }}
             />
@@ -122,6 +128,7 @@ function App() {
         >
           Generate
         </button>
+
         <div className="box">
           {password &&
             password.map((p, i) => {
